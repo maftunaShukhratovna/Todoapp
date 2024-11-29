@@ -18,7 +18,7 @@ if ($uri == '/') {
     view('home', [
         'todos'=>$todos
     ]);
-} elseif ($uri == '/store') {
+}elseif ($uri == '/store') {
     if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
         $todo->store($_POST['title'], $_POST['due_date']);
         header('Location: /');
@@ -30,6 +30,24 @@ if ($uri == '/') {
         header('Location: /');
         exit();
     }
-} else{
+}elseif ($uri == '/in-progress') {
+    if (!empty($_GET['id'])) {
+        $todo->inProgress($_GET['id']);
+        header('Location: /');
+        exit();
+    }
+}elseif ($uri == '/pending') {
+    if (!empty($_GET['id'])) {
+        $todo->pending($_GET['id']);
+        header('Location: /');
+        exit();
+    }
+}elseif($uri=='/delete'){
+    if (!empty($_GET['id'])) {
+        $todo->delete($_GET['id']);
+        header('Location: /');
+        exit();
+    }
+}else{
     echo $uri . " Bu sahifa topilmadi!";
 }

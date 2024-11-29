@@ -21,8 +21,6 @@ class Todo{
 
         $stmt->close();
 
-
-        
     }
 
     public function get(){
@@ -38,11 +36,41 @@ class Todo{
 
     }
 
-    public function complete(int $id){
-        $query= "UPDATE todos set status='completed' where id=:id";
-        return $this->mysqli->prepare($query)->execute([
-            ":id"=> $id
-            ]);
+    public function delete(string $id){
+        $query= "DELETE FROM todos WHERE id=?";
+        $stmt=$this->mysqli->prepare($query);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $stmt->close();
     }
+
+
+
+    public function complete(int $id){
+        $query= "UPDATE todos set status='completed', updated_at=NOW() where id=?";
+        $stmt=$this->mysqli->prepare($query);
+        $stmt->bind_param("i",$id);
+        return $stmt->execute();
+
+
+    }
+
+
+    public function inProgress (int $id): bool {
+        $query = "UPDATE todos set status='in_progress', in_progress=NOW() where id=?";
+        $stmt=$this->mysqli->prepare($query);
+        $stmt->bind_param("i",$id);
+        return $stmt->execute();
+    }
+
+    public function pending (int $id): bool {
+        $query = "UPDATE todos set status='pending', pending=NOW() where id=?";
+        $stmt=$this->mysqli->prepare($query);
+        $stmt->bind_param("i",$id);
+        return $stmt->execute();
+        
+    } 
+
+
 
 }

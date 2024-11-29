@@ -10,7 +10,6 @@ class DB {
     
         $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->database);
 
-        echo "Mysql ulandi";
     }
 }
 ?>
