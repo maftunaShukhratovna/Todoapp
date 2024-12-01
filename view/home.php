@@ -38,9 +38,6 @@
             font-weight:bold;
         
         }
-
-
-
     </style>
 </head>
 <body class="bg-dark-subtle">

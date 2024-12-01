@@ -24,3 +24,5 @@ Bu To-Do ilovasi PHP, MySQL va HTML/CSS yordamida yaratilgan oddiy va vazifalarn
 
    ```bash
    git clone https://github.com/maftunaShukhratovna/Todoapp.git
+
+

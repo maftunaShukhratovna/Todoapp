@@ -1,53 +1,77 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
-
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 require 'src/todo.php';
 
 require 'helpers.php';
 
+require 'src/router.php';
+
+
+
+$router=new Router();
+
 $todo = new Todo();
 
-if ($uri == '/') {
+$router->get('/', function() {
+    PageNotFound('pgnotfound');
+});
+
+
+$router->get('/todos', function () use ($todo) {
     $todos = $todo->get();
     view('home', [
-        'todos'=>$todos
+        'todos' => $todos
     ]);
-}elseif ($uri == '/store') {
-    if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
-        $todo->store($_POST['title'], $_POST['due_date']);
-        header('Location: /');
-        exit();
-    }
-}elseif ($uri == '/complete') {
+});
+
+
+$router->get('/complete', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->complete($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
         exit();
     }
-}elseif ($uri == '/in-progress') {
+});
+
+$router->get('/in-progress', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->inProgress($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
         exit();
     }
-}elseif ($uri == '/pending') {
+});
+
+
+$router->get('/pending', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->pending($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
         exit();
     }
-}elseif($uri=='/delete'){
+});
+
+
+$router->post('/store', function () use ($todo) {
+    if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
+        $todo->store($_POST['title'], $_POST['due_date']);
+        header('Location: /todos');
+        exit();
+    }
+});
+
+
+$router->get('/delete', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->delete($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
         exit();
     }
-}else{
-    echo $uri . " Bu sahifa topilmadi!";
-}
+});
+
+
+

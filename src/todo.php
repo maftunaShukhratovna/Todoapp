@@ -16,11 +16,8 @@ class Todo{
 
 
         $stmt->bind_param('ss',$title, $duedate);
-
         $stmt->execute();
-
         $stmt->close();
-
     }
 
     public function get(){
@@ -51,8 +48,6 @@ class Todo{
         $stmt=$this->mysqli->prepare($query);
         $stmt->bind_param("i",$id);
         return $stmt->execute();
-
-
     }
 
 
@@ -62,6 +57,7 @@ class Todo{
         $stmt->bind_param("i",$id);
         return $stmt->execute();
     }
+    
 
     public function pending (int $id): bool {
         $query = "UPDATE todos set status='pending', pending=NOW() where id=?";
