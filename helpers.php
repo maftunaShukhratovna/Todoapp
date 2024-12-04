@@ -4,6 +4,3 @@ function view (string $page, array $data = []) {
     require 'view/' . $page . '.php';
 }
 
-function PageNotFound (string $page){
-    require 'view/'.$page. '.php';
-}

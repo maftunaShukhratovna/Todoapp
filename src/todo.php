@@ -68,5 +68,22 @@ class Todo{
     } 
 
 
+    public function getById($id){
+        $query="SELECT * FROM todos WHERE id=?";
+        $smtm=$this->mysqli->prepare($query);
+        $smtm->bind_param("i",$id);
+        $smtm->execute();
+        $result=$smtm->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function update( $id, $title, $due_date){
+        $query= "UPDATE todos SET title=?, due_date=?, updated_at=NOW() where id=?";
+        $stmt= $this->mysqli->prepare($query);
+        $stmt->bind_param("ssi",$title, $due_date, $id);
+        return $stmt->execute();
+    }
+
+
 
 }
