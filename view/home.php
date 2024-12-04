@@ -70,8 +70,8 @@
                                 <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
                             ' . $todo["title"] . '
                             <div>
-                            <a href="/delete?id=' . $todo["id"] . '" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             <a href="/edit?id=' . $todo["id"] . '" class="btn btn-outline-primary"><i class="fa fa-edit"></i></a>
+                            <a href="/delete?id=' . $todo["id"] . '" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </div>
                         </li>
                             ';
