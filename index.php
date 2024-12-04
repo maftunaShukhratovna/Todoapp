@@ -32,16 +32,18 @@ $router->get('/todos', function () use ($todo) {
 
 $router->get('/complete', function () use ($todo) {
     if (!empty($_GET['id'])) {
+        $id=intval($_GET['id']);
         $todo->complete($_GET['id']);
-        header('Location: /todos');
+        header('Location: /edit?id='.$id);
         exit();
     }
 });
 
 $router->get('/in-progress', function () use ($todo) {
     if (!empty($_GET['id'])) {
+        $id=intval($_GET['id']);
         $todo->inProgress($_GET['id']);
-        header('Location: /todos');
+        header('Location: /edit?id='.$id);
         exit();
     }
 });
@@ -49,8 +51,10 @@ $router->get('/in-progress', function () use ($todo) {
 
 $router->get('/pending', function () use ($todo) {
     if (!empty($_GET['id'])) {
+        $id=intval($_GET['id']);
         $todo->pending($_GET['id']);
-        header('Location: /todos');
+        
+        header('Location: /edit?id='.$id);
         exit();
     }
 });

@@ -55,10 +55,24 @@
                                 <input type="text" class="form-control" id="updated_at"
                                     value="<?= htmlspecialchars($task['updated_at']) ?>" disabled>
                             </div>
-                            <div class="mb-3">
-                               <!-- pending inprogress completed tugmalari uchun-->
+
+                            <div class="text-center my-4">
+                                <a href="/pending?id=<?= htmlspecialchars($task['id']) ?>"
+                                    class="btn <?= $task['status'] === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?> mx-2">
+                                    <i class="fa fa-clock"></i> Pending
+                                </a>
                                 
+                                <a href="/in-progress?id=<?= htmlspecialchars($task['id']) ?>"
+                                    class="btn <?= $task['status'] === 'in_progress' ? 'btn-primary' : 'btn-outline-primary' ?> mx-2">
+                                    <i class="fa fa-hourglass-half"></i> In-Progress
+                                </a>
+
+                                <a href="/complete?id=<?= htmlspecialchars($task['id']) ?>"
+                                    class="btn <?= $task['status'] === 'completed' ? 'btn-success' : 'btn-outline-success' ?> mx-2">
+                                    <i class="fa fa-check"></i> Completed
+                                </a>
                             </div>
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success">Update Task</button>
                                 <a href="/todos" class="btn btn-secondary">Cancel</a>
