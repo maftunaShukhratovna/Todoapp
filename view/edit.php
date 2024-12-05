@@ -33,7 +33,7 @@
                         <h3>Edit Task</h3>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/update">
+                        <form method="POST" action="/todos/<?=$task['id']?>/update">
                             <input type="hidden" name="id" value="<?= htmlspecialchars($task['id']) ?>">
                             <div class="mb-3">
                                 <label for="title" class="form-label">Task Title</label>
@@ -57,20 +57,22 @@
                             </div>
 
                             <div class="text-center my-4">
-                                <a href="/pending?id=<?= htmlspecialchars($task['id']) ?>"
+
+                                <a href="/edit/<?= $task['id'] ?>/pending"
                                     class="btn <?= $task['status'] === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?> mx-2">
                                     <i class="fa fa-clock"></i> Pending
                                 </a>
                                 
-                                <a href="/in-progress?id=<?= htmlspecialchars($task['id']) ?>"
+                                <a href="/edit/<?= $task['id']?>/in-progrees"
                                     class="btn <?= $task['status'] === 'in_progress' ? 'btn-primary' : 'btn-outline-primary' ?> mx-2">
                                     <i class="fa fa-hourglass-half"></i> In-Progress
                                 </a>
 
-                                <a href="/complete?id=<?= htmlspecialchars($task['id']) ?>"
+                                <a href="/edit/<?= htmlspecialchars($task['id']) ?>/complete"
                                     class="btn <?= $task['status'] === 'completed' ? 'btn-success' : 'btn-outline-success' ?> mx-2">
                                     <i class="fa fa-check"></i> Completed
                                 </a>
+
                             </div>
 
                             <div class="text-center">

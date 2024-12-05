@@ -8,6 +8,7 @@ class Todo{
         $db=new DB();
         $this ->mysqli=$db->conn;
     }
+
      
     public function store(string $title, string $duedate){
 
@@ -81,7 +82,14 @@ class Todo{
         $query= "UPDATE todos SET title=?, due_date=?, updated_at=NOW() where id=?";
         $stmt= $this->mysqli->prepare($query);
         $stmt->bind_param("ssi",$title, $due_date, $id);
-        return $stmt->execute();
+        // return $stmt->execute();
+
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+    
+        var_dump("Update successful!", $stmt->affected_rows); // Debug SQL execution result
+        return $stmt->affected_rows > 0;
     }
 
 
