@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class DB {
     public $host;
     public $user;
@@ -12,7 +13,7 @@ class DB {
         $this->pass = $_ENV['DB_PASSWORD'];
         $this->database = $_ENV['DB_DATABASE'];
     
-        $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->database);
+        $this->conn = new \mysqli($this->host, $this->user, $this->pass, $this->database);
     }
 }
 ?>

@@ -6,14 +6,11 @@
 
 require 'bootstrap.php';
 
-require 'src/todo.php';
+use App\Todo;
+use App\Router;
+use App\Bot;
 
 require 'helpers.php';
-
-require 'src/router.php';
-
-require 'src/telegram.php';
-
 
 
 $router=new Router();
@@ -66,7 +63,6 @@ $router->post('/todos/{id}/update', function($todoId) use ($todo) {
 });
 
 
-
 $router->get('/edit/{id}/complete', function ($todoId) use ($todo) { 
     $todo->complete($todoId);
     redirect('/todos');
@@ -85,14 +81,12 @@ $router->get('/edit/{id}/pending', function ($todoId) use ($todo) {
 
 
 //telegram bot
-$updates=$bot->getUpdates();
+// $updates=$bot->getUpdates();
 
+//     foreach($updates as $update){
+//         $bot->Requests($update);
+//     }
 
-if(isset($updates)){
-    foreach($updates as $update){
-        $bot->Requests($update);
-    }
-}
        
 
 
