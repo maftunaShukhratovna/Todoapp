@@ -15,11 +15,11 @@ class Todo{
         $query="INSERT INTO todos(title, status, due_date, created_at, updated_at) VALUES (?, 'pending', ?, NOW(), NOW())";
         $stmt=$this->mysqli->prepare($query);
 
-
         $stmt->bind_param('ss',$title, $duedate);
         $stmt->execute();
         $stmt->close();
     }
+
 
     public function get(){
         $query= "SELECT * FROM todos";
@@ -33,6 +33,8 @@ class Todo{
         return $todos;
 
     }
+
+    
 
     public function delete(string $id){
         $query= "DELETE FROM todos WHERE id=?";
@@ -82,14 +84,7 @@ class Todo{
         $query= "UPDATE todos SET title=?, due_date=?, updated_at=NOW() where id=?";
         $stmt= $this->mysqli->prepare($query);
         $stmt->bind_param("ssi",$title, $due_date, $id);
-        // return $stmt->execute();
-
-        if (!$stmt->execute()) {
-            die("Execute failed: " . $stmt->error);
-        }
-    
-        var_dump("Update successful!", $stmt->affected_rows); // Debug SQL execution result
-        return $stmt->affected_rows > 0;
+        
     }
 
 

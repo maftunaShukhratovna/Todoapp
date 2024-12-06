@@ -4,6 +4,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
+require 'bootstrap.php';
 
 require 'src/todo.php';
 
@@ -11,12 +12,15 @@ require 'helpers.php';
 
 require 'src/router.php';
 
+require 'src/telegram.php';
+
 
 
 $router=new Router();
 
 $todo = new Todo();
 
+$bot= new Bot();
 
 $router->get('/', function () {
     view('pgnotfound');
@@ -62,6 +66,7 @@ $router->post('/todos/{id}/update', function($todoId) use ($todo) {
 });
 
 
+
 $router->get('/edit/{id}/complete', function ($todoId) use ($todo) { 
     $todo->complete($todoId);
     redirect('/todos');
@@ -78,7 +83,22 @@ $router->get('/edit/{id}/pending', function ($todoId) use ($todo) {
         redirect('/todos');
 });
 
+
+//telegram bot
+$updates=$bot->getUpdates();
+
+
+if(isset($updates)){
+    foreach($updates as $update){
+        $bot->Requests($update);
+    }
+}
        
+
+
+
+
+
 
 
 
