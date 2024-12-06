@@ -81,11 +81,11 @@ $router->get('/edit/{id}/pending', function ($todoId) use ($todo) {
 
 
 //telegram bot
-// $updates=$bot->getUpdates();
+$updates=$bot->getUpdates();
 
-//     foreach($updates as $update){
-//         $bot->Requests($update);
-//     }
+foreach($updates as $update){
+    $bot->Requests($update);
+}
 
        
 
