@@ -5,87 +5,44 @@
 // error_reporting(E_ALL);
 
 require 'bootstrap.php';
-
-use App\Todo;
-use App\Router;
-use App\Bot;
-
 require 'helpers.php';
 
 
-$router=new Router();
+$router=new App\Router();
 
-$todo = new Todo();
+$router->get('/', fn()=> require 'controllers/pgController.php');
 
-$bot= new Bot();
+$router->get('/todos/{id}/delete', fn($todoId)=>require 'controllers/deleteController.php'); 
 
-$router->get('/', function () {
-    view('pgnotfound');
-});
+$router->get('/todos', fn()=>require 'controllers/homeController.php');
 
+$router->post('/store', fn()=>require 'controllers/storeController.php');
 
-$router->get('/todos/{id}/delete', function($todoId) use ($todo) {
-    $todo->delete($todoId);
-    redirect('/todos');
-});
+$router->get('/todos/{id}/edit', fn($todoId)=> require 'controllers/editController.php');
 
+$router->post('/todos/{id}/update',fn($todoId)=>require 'controllers/updateController.php');
 
-$router->get('/todos', function () use ($todo) {
-    $todos = $todo->get();
-    view('home', [
-        'todos' => $todos
-    ]);
-});
+$router->get('/edit/{id}/complete', fn($todoId)=>require 'controllers/completeController.php');
 
+$router->get('/edit/{id}/pending', fn($todoId)=>require 'controllers/pendingController.php');
 
-$router->post('/store', function () use ($todo) {
-    if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
-        $todo->store($_POST['title'], $_POST['due_date']);
-        redirect('/todos');
-    }
-});
+$router->get('/edit/{id}/in-progrees', fn($todoId)=>require 'controllers/InProgressController.php');
 
 
 
-$router->get('/todos/{id}/edit', function ($todoId) use ($todo) {
-    $task = $todo->getById($todoId);
-    view('edit', ['task' => $task]);
-});
 
 
-$router->post('/todos/{id}/update', function($todoId) use ($todo) {
-        $title = $_POST['title'];
-        $due_date = $_POST['due_date'];
-
-        $todo->update($todoId, $title, $due_date);
-        redirect('/todos');
-    
-});
 
 
-$router->get('/edit/{id}/complete', function ($todoId) use ($todo) { 
-    $todo->complete($todoId);
-    redirect('/todos');
-});
 
-$router->get('/edit/{id}/in-progrees', function ($todoId) use ($todo) { 
-    $todo->inProgress($todoId);
-    redirect('/todos');
-});
-
-
-$router->get('/edit/{id}/pending', function ($todoId) use ($todo) { 
-        $todo->pending($todoId);
-        redirect('/todos');
-});
 
 
 //telegram bot
-$updates=$bot->getUpdates();
+// $updates=$bot->getUpdates();
 
-foreach($updates as $update){
-    $bot->Requests($update);
-}
+// foreach($updates as $update){
+//     $bot->Requests($update);
+// }
 
        
 

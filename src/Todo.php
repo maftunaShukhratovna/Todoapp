@@ -31,7 +31,6 @@ class Todo{
         while($row=mysqli_fetch_assoc($result)){
             $todos[]=$row;
         }
-
         return $todos;
 
     }
@@ -86,9 +85,8 @@ class Todo{
         $query= "UPDATE todos SET title=?, due_date=?, updated_at=NOW() where id=?";
         $stmt= $this->mysqli->prepare($query);
         $stmt->bind_param("ssi",$title, $due_date, $id);
-        
+        $stmt->execute();
+        $stmt->close();
     }
-
-
 
 }
