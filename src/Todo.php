@@ -8,10 +8,19 @@ class Todo{
     public $mysqli;
     public function __construct(){
         $db=new DB();
-        $this ->mysqli=$db->conn;
+        $this->mysqli=$db->conn;
     }
 
-     
+    public function users(string $fullname, string $email, string $passwords){
+        $query="INSERT INTO users (fullname, email, passwords) VALUES (?,?,?)";
+        $stmt=$this->mysqli->prepare($query);
+
+        $stmt->bind_param('sss',$fullname,$email, $passwords);
+        $stmt->execute();
+        $stmt->close();
+
+    }
+
     public function store(string $title, string $duedate){
 
         $query="INSERT INTO todos(title, status, due_date, created_at, updated_at) VALUES (?, 'pending', ?, NOW(), NOW())";
@@ -46,7 +55,7 @@ class Todo{
     }
 
 
-
+    
     public function complete(int $id){
         $query= "UPDATE todos set status='completed', updated_at=NOW() where id=?";
         $stmt=$this->mysqli->prepare($query);
@@ -88,5 +97,23 @@ class Todo{
         $stmt->execute();
         $stmt->close();
     }
+
+    public function login($email, $passwords)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+
+            if (password_verify($passwords, $user['passwords'])) {
+                return $user;
+            } 
+        }
+    }
+
+
 
 }

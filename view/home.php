@@ -3,27 +3,26 @@ require 'view/componenets/header.php';
 ?>
 
 <div class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="todo-body my-5 p-3">
-            <h1 class="text-center todo-text">Todo App</h1>
-            <p class="paragraph">Add your daily tasks here!</p>
-            <form method="POST" action="/store">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Add task here"
-                           aria-label="Recipient's username" aria-describedby="button-addon2"
-                           name="title"
-                           required
-                    >
-                    <input type="datetime-local" class="form-control" placeholder="Recipient's username"
-                           aria-label="Recipient's username" aria-describedby="button-addon2"
-                           name="due_date"
-                           required
-                    >
-                    <button class="btn btn-primary" type="submit" id="button-addon2"><i class="fas fa-plus"></i></button>
-                </div>
-            </form>
-            <ul class="list-group">
-                <?php
+    <div class="bodyofpage">
+        <div class="bodyforpg">
+            <div class="row d-flex justify-content-center">
+                <div class="todo-body my-5 p-3">
+                    <h1 class="text-center todo-text">Todo App</h1>
+                    <p class="paragraph">Add your daily tasks here!</p>
+                    <form method="POST" action="/store">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Add task here"
+                                aria-label="Recipient's username" aria-describedby="button-addon2" name="title"
+                                required>
+                            <input type="datetime-local" class="form-control" placeholder="Recipient's username"
+                                aria-label="Recipient's username" aria-describedby="button-addon2" name="due_date"
+                                required>
+                            <button class="btn btn-primary" type="submit" id="button-addon2"><i
+                                    class="fas fa-plus"></i></button>
+                        </div>
+                    </form>
+                    <ul class="list-group">
+                        <?php
                 /** @var TYPE_NAME $todos */
 
                 foreach ($todos as $todo) {
@@ -38,9 +37,13 @@ require 'view/componenets/header.php';
                             ';
                 }
                 ?>
-            </ul>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
-<?php
+
+    <?php
 require 'view/componenets/footer.php';
 ?>
