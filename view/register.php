@@ -23,6 +23,17 @@ require 'view/componenets/header.php';
                 <input type="password" name="passwords" placeholder="Password" required>
             </div>
 
+            <div class="input-box">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" name="repeatpasswords" placeholder="Repeat Password" required>
+            </div>
+
+            <?php if (!empty($errorMessage)): ?>
+            <div class="error-message" style="color: red;">
+                <?= htmlspecialchars($errorMessage) ?>
+            </div>
+            <?php endif; ?>
+
             <button class="login-btn" type="submit">Register</button>
 
             <p class="register">
@@ -35,3 +46,4 @@ require 'view/componenets/header.php';
 <?php
 require 'view/componenets/footer.php';
 ?>
+

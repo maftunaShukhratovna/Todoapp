@@ -11,11 +11,12 @@ class Todo{
         $this->mysqli=$db->conn;
     }
 
-    public function users(string $fullname, string $email, string $passwords){
-        $query="INSERT INTO users (fullname, email, passwords) VALUES (?,?,?)";
+    public function users(string $fullname, string $email, string $passwords, string $repeatPasswords){
+        
+        $query="INSERT INTO users (fullname, email, passwords, repeatpasswords) VALUES (?,?,?,?)";
         $stmt=$this->mysqli->prepare($query);
 
-        $stmt->bind_param('sss',$fullname,$email, $passwords);
+        $stmt->bind_param('ssss',$fullname,$email, $passwords, $repeatPasswords);
         $stmt->execute();
         $stmt->close();
 
@@ -45,7 +46,6 @@ class Todo{
     }
 
     
-
     public function delete(string $id){
         $query= "DELETE FROM todos WHERE id=?";
         $stmt=$this->mysqli->prepare($query);
@@ -55,7 +55,6 @@ class Todo{
     }
 
 
-    
     public function complete(int $id){
         $query= "UPDATE todos set status='completed', updated_at=NOW() where id=?";
         $stmt=$this->mysqli->prepare($query);
@@ -98,8 +97,20 @@ class Todo{
         $stmt->close();
     }
 
-    public function login($email, $passwords)
-    {
+    public function emailchecker($email){
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function login($email, $passwords){
         $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -107,11 +118,14 @@ class Todo{
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-
-            if (password_verify($passwords, $user['passwords'])) {
+            if ($passwords==$user['passwords']) {
                 return $user;
-            } 
+            } else {
+                return null;
+            }
         }
+
+        return null; 
     }
 
 

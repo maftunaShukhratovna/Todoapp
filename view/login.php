@@ -9,11 +9,12 @@ require 'view/componenets/header.php';
 
             <div class="input-box">
                 <i class='bx bxs-user'></i>
-                <input type="text" name="" placeholder="Email">
+                <input type="text" name="email" placeholder="Email">
             </div>
+            
             <div class="input-box">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="password" placeholder="Password">
+                <input type="password" name="passwords" placeholder="Password">
             </div>
 
             <div class="remember-forgot-box">
@@ -23,6 +24,12 @@ require 'view/componenets/header.php';
                 </label>
                 <a href="#">Forgot Password?</a>
             </div>
+
+            <?php if (!empty($errorMessage)): ?>
+            <div class="error-message" style="color: red;">
+                <?= htmlspecialchars($errorMessage) ?>
+            </div>
+            <?php endif; ?>
 
             <button class="login-btn">Login</button>
 

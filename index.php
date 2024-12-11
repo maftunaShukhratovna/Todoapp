@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 require 'bootstrap.php';
 require 'helpers.php';
@@ -16,9 +16,11 @@ $router->get('/', fn()=> require 'controllers/pgController.php');
 
 $router->post('/register', fn($users)=>require 'controllers/registerController.php');
 
-$router->get('/registerpage', fn()=>require 'controllers/registerpage.php');
+$router->get('/registerpage', fn($errorMessage)=>require 'controllers/registerpage.php');
 
 $router->get('/loginpage', fn()=>require 'controllers/loginpage.php');
+
+$router->post('/login', fn($users)=>require 'controllers/loginController.php');
 
 
 

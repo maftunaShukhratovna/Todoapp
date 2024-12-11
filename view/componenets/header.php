@@ -119,7 +119,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
+        background-image: url();
         background-size: cover;
         background-position: center;
     }
