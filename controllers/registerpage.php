@@ -1,2 +1,2 @@
 <?php
-view('register',['errorMessage'=>$errorMessage]);
+view('register');

@@ -16,7 +16,7 @@ $router->get('/', fn()=> require 'controllers/pgController.php');
 
 $router->post('/register', fn($users)=>require 'controllers/registerController.php');
 
-$router->get('/registerpage', fn($errorMessage)=>require 'controllers/registerpage.php');
+$router->get('/registerpage', fn()=>require 'controllers/registerpage.php');
 
 $router->get('/loginpage', fn()=>require 'controllers/loginpage.php');
 
