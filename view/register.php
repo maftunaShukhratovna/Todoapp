@@ -1,4 +1,9 @@
 <?php
+if (isset($_SESSION['errorMessage'])) {
+    $errorMessage = $_SESSION['errorMessage'];
+    unset($_SESSION['errorMessage']);
+}
+
 require 'view/componenets/header.php';
 ?>
 

@@ -27,10 +27,7 @@ if($todo->emailchecker($email)){
     redirect("/todos");
 }
 
-if (isset($_SESSION['errorMessage'])) {
-    $errorMessage = $_SESSION['errorMessage'];
-    unset($_SESSION['errorMessage']);
-}
+
 
 
 
