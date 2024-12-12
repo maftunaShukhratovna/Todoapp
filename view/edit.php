@@ -1,8 +1,12 @@
 <?php
 require 'view/componenets/header.php';
 ?>
+<?php
+require 'view/componenets/navbar.php';
+?>
     <div class="container my-5">
         <div class="row d-flex justify-content-center">
+
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header text-center">

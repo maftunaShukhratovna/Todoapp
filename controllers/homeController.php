@@ -1,5 +1,5 @@
 <?php 
 
-view('home', [
+view('todos', [
     'todos' => (new App\Todo())->get()
 ]);

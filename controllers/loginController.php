@@ -18,7 +18,11 @@ if(!$todo->emailchecker($email)){
 $user=$todo->login($email, $passwords);
 
 if($user){
-    $_SESSION['user']=$user;
+    $_SESSION['user'] = [
+        'id' => $user['id'],
+        'name' => $user['fullname'],
+        'email' => $user['email'],
+    ];
     redirect('/todos');
 } else{
     $errorMessage="Password wrong";

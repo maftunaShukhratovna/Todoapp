@@ -2,48 +2,27 @@
 require 'view/componenets/header.php';
 ?>
 
-<div class="container">
-    <div class="bodyofpage">
-        <div class="bodyforpg">
-            <div class="row d-flex justify-content-center">
-                <div class="todo-body my-5 p-3">
-                    <h1 class="text-center todo-text">Todo App</h1>
-                    <p class="paragraph">Add your daily tasks here!</p>
-                    <form method="POST" action="/store">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Add task here"
-                                aria-label="Recipient's username" aria-describedby="button-addon2" name="title"
-                                required>
-                            <input type="datetime-local" class="form-control" placeholder="Recipient's username"
-                                aria-label="Recipient's username" aria-describedby="button-addon2" name="due_date"
-                                required>
-                            <button class="btn btn-primary" type="submit" id="button-addon2"><i
-                                    class="fas fa-plus"></i></button>
-                        </div>
-                    </form>
-                    <ul class="list-group">
-                        <?php
-                /** @var TYPE_NAME $todos */
+<?php
+require 'view/componenets/navbar.php';
+?>
 
-                foreach ($todos as $todo) {
-                        echo '
-                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-                            ' . $todo["title"] . '
-                            <div>
-                            <a href="/todos/' . $todo["id"] . '/edit" class="btn btn-outline-primary"><i class="fa fa-edit"></i></a>
-                            <a href="/todos/' . $todo["id"] . '/delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </li>
-                            ';
-                }
-                ?>
-                    </ul>
+
+<div class="homepage">
+    <div class="bodyofpage text-center d-flex align-items-center justify-content-center vh-100">
+        <div class="container">
+            <div class="content">
+                <h1 class="display-3 fw-bold">Welcome to the To-Do App</h1>
+                <p class="fs-4">Organize your tasks, stay productive, and achieve your goals effortlessly.</p>
+                <div>
+                    <a href="/loginpage" class="btn btn-primary me-2">Login</a>
+                    <a href="/registerpage" class="btn btn-success">Register</a>
                 </div>
             </div>
-
         </div>
     </div>
+</div>
 
-    <?php
+<?php
 require 'view/componenets/footer.php';
 ?>
+

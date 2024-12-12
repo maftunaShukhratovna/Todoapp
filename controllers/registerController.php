@@ -7,7 +7,6 @@ $email = $_POST['email'] ?? null;
 $passwords = $_POST['passwords'] ?? null;
 $repeatPasswords=$_POST['repeatpasswords']?? null;
 
-session_start();
 $errorMessage=null;
 
 $todo = new Todo();

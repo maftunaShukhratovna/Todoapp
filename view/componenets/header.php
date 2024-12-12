@@ -12,196 +12,192 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
     body {
-        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        color: #333;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
     }
 
-    .card {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .navbar {
+        background-color: #0288d1;
     }
 
-    .card-header {
-        background-color: #0d6efd;
-        color: white;
+    .navbar a.navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 
     .todo-body {
-        max-width: 700px;
-        box-shadow: 0 0 5px 5px #ccc;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 30px;
     }
 
     .todo-text {
         font-weight: bold;
+        color: #0288d1;
     }
 
-    .completed {
-        font-weight: bold;
-        text-decoration: line-through;
-        color: green;
+    .list-group-item {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .in_progress {
-        text-decoration: underline;
-        color: #d1970f;
-        font-weight: bold;
+    .list-group-item.completed {
+        background: #e8f5e9;
+        color: #388e3c;
     }
 
-    .pending {
-        font-weight: bold;
+    .list-group-item.pending {
+        background: #fff3e0;
+        color: #f57c00;
     }
 
-    .paragraph {
-        text-align: center;
-        font-weight: bold;
-
+    .list-group-item.in_progress {
+        background: #e3f2fd;
+        color: #0288d1;
     }
 
-    .bodyofpage {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    .login-form,
+    .register-form {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: auto;
     }
 
-    .bodyforpg {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #333;
-    }
-
-    .container {
-        text-align: center;
-        background-color: #fff;
-        padding: 50px;
-        border-radius: 8px;
-        box-shadow: 0 0 100 rgba(0, 0, 0, 0.1);
-    }
-
-    .message h1 {
-        font-size: 100px;
-        font-weight: bold;
-        color: #e74c3c;
-    }
-
-    .message p {
-        font-size: 18px;
+    .login-title,
+    .register-title {
+        color: #0288d1;
+        font-size: 2rem;
         margin-bottom: 20px;
     }
 
-    .btn-pagenotfound {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #3498db;
-        color: #fff;
-        text-decoration: none;
+    .input-box input {
+        border: 1px solid #0288d1;
         border-radius: 5px;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
     }
 
-    .btn-pagenotfound:hover {
-        background-color: #2980b9;
+    .input-box input:focus {
+        border-color: #0288d1;
+        box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-    .firstbody {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+    button {
+        background: #0288d1;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
-    .secondbody {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url();
-        background-size: cover;
-        background-position: center;
+    button:hover {
+        background: #0277bd;
     }
 
-    .login-form {
-        background: rgba(64, 64, 64, 0.15);
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        padding: 30px;
-        border-radius: 16px;
-        backdrop-filter: blur(25px);
+    .status {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        border-radius: 15px;
+    }
+
+    footer {
         text-align: center;
+        padding: 10px;
+        background: #0288d1;
         color: white;
-        width: 400px;
-        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
     }
 
-    .login-title {
-        font-size: 40px;
-        margin-bottom: 40px;
+    footer a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .auth-container {
+        background: white;
+        padding: 30px;
+        max-width: 400px;
+        margin: 50px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .auth-header h1 {
+        font-size: 2rem;
+        color: #00796b;
+        margin-bottom: 10px;
+    }
+
+    .auth-header p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 20px;
     }
 
     .input-box {
-        margin: 20px 0;
+        margin-bottom: 20px;
+        text-align: left;
         position: relative;
+    }
+
+    .input-label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #333;
     }
 
     .input-box input {
         width: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        padding: 12px 12px 12px 45px;
-        border-radius: 99px;
-        outline: 3px solid transparent;
-        transition: 0.3s;
-        font-size: 17px;
-        color: white;
-        font-weight: 600;
-    }
-
-    .input-box input::placeholder {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 17px;
-        font-weight: 500;
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
     }
 
     .input-box input:focus {
-        outline: 3px solid rgba(255, 255, 255, 0.3);
+        border-color: #00796b;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 121, 107, 0.3);
     }
 
-    .input-box input::-ms-reveal {
-        filter: invert(100%);
+    .auth-button {
+        width: 100%;
+        background-color: #00796b;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
     }
 
-    .input-box i {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.8);
+    .auth-button:hover {
+        background-color: #004d40;
     }
 
     .remember-forgot-box {
         display: flex;
         justify-content: space-between;
-        margin: 20px 0;
-        font-size: 15px;
-    }
-
-    .remember-forgot-box label {
-        display: flex;
-        gap: 8px;
-        cursor: pointer;
-    }
-
-    .remember-forgot-box input {
-        accent-color: white;
-        cursor: pointer;
+        align-items: center;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
     }
 
     .remember-forgot-box a {
-        color: white;
+        color: #00796b;
         text-decoration: none;
     }
 
@@ -209,38 +205,30 @@
         text-decoration: underline;
     }
 
-    .login-btn {
-        width: 100%;
-        padding: 10px 0;
-        background: #2F9CF4;
-        border: none;
-        border-radius: 99px;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.3s;
+    .error-message {
+        color: red;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
     }
 
-    .login-btn:hover {
-        background: #0B87EC;
+    .switch-auth {
+        font-size: 0.9rem;
+        color: #555;
     }
 
-    .register {
-        margin-top: 15px;
-        font-size: 15px;
-    }
-
-    .register a {
-        color: white;
+    .switch-auth a {
+        color: #00796b;
         text-decoration: none;
-        font-weight: 500;
     }
 
-    .register a:hover {
+    .switch-auth a:hover {
         text-decoration: underline;
     }
     </style>
 </head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-tkXxZsImT5zLwld3z1qMPTxPQIc0j9vQ4tGHSnAzzCUQg+Kg5lnJRmM3ozcdRgyT" crossorigin="anonymous">
+    </script>
+</body>
 
-<body class="bg-dark-subtle">
+</html>

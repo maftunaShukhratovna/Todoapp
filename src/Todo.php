@@ -128,6 +128,15 @@ class Todo{
         return null; 
     }
 
+    // public function getuserById($email, $password){
+    //     $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+    //     $stmt->bind_param("s",$email);
+    //     $stmt->execute();
+
+    //     $result=$stmt->get_result();
+    //     $user=$result->fetch_assoc();
+
+    // }
 
 
 }

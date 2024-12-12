@@ -1,3 +1,3 @@
 <?php
 
-view('pgnotfound');
+view('home');
