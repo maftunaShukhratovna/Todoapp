@@ -23,15 +23,16 @@ if($todo->emailchecker($email)){
     exit();
 } else {
     $todo->users($fullname, $email, $passwords, $repeatPasswords);
-    redirect("/todos");
+
+    $user=$todo->login($email, $passwords);
+
+        if($user){
+            $_SESSION['user'] = [
+            'id' => $user['id'],
+            'name' => $user['fullname'],
+            'email' => $user['email'],
+            ];
+        redirect('/todos');
+        }
+     
 }
-
-
-
-
-
-
-
-
-
-

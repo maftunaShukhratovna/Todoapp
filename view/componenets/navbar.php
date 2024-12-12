@@ -12,12 +12,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bx bx-user"></i> <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                                <i class="bx bx-user"></i> <?= htmlspecialchars($_SESSION['user']['email']) ?>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                            </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">

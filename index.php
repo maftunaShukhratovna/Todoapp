@@ -12,6 +12,8 @@ $router=new App\Router();
 
 $router->get('/', fn()=> require 'controllers/pgController.php');
 
+$router->get('/logout', fn()=> require 'controllers/logout.php');
+
 
 
 $router->post('/register', fn($users)=>require 'controllers/registerController.php');
