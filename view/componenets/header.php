@@ -48,7 +48,7 @@
     }
 
     .list-group-item.completed {
-        background: #e8f5e9;
+        background: #a4f08b;
         color: #388e3c;
     }
 
