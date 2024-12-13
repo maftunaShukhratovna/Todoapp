@@ -11,39 +11,49 @@ class Todo{
         $this->mysqli=$db->conn;
     }
 
-    public function users(string $fullname, string $email, string $passwords, string $repeatPasswords){
+    // public function users(string $fullname, string $email, string $passwords, string $repeatPasswords){
         
-        $query="INSERT INTO users (fullname, email, passwords, repeatpasswords) VALUES (?,?,?,?)";
+    //     $query="INSERT INTO users (fullname, email, passwords, repeatpasswords) VALUES (?,?,?,?)";
+    //     $stmt=$this->mysqli->prepare($query);
+
+    //     $stmt->bind_param('ssss',$fullname,$email, $passwords, $repeatPasswords);
+    //     $stmt->execute();
+    //     $stmt->close();
+
+    // }
+
+    public function store(string $title, string $duedate, int $userId){
+
+        $query="INSERT INTO todos(title, status, due_date, created_at, updated_at, user_id) VALUES (?, 'pending', ?, NOW(), NOW(),?)";
         $stmt=$this->mysqli->prepare($query);
 
-        $stmt->bind_param('ssss',$fullname,$email, $passwords, $repeatPasswords);
-        $stmt->execute();
-        $stmt->close();
-
-    }
-
-    public function store(string $title, string $duedate){
-
-        $query="INSERT INTO todos(title, status, due_date, created_at, updated_at) VALUES (?, 'pending', ?, NOW(), NOW())";
-        $stmt=$this->mysqli->prepare($query);
-
-        $stmt->bind_param('ss',$title, $duedate);
+        $stmt->bind_param('ssi',$title, $duedate, $userId);
         $stmt->execute();
         $stmt->close();
     }
 
 
-    public function get(){
-        $query= "SELECT * FROM todos";
-        $result=$this->mysqli->query($query);
+    
+    public function get($userId) {
+        $query = "SELECT * FROM todos WHERE user_id = ?";
+        $stmt = $this->mysqli->prepare($query);
+        $stmt->bind_param("i", $userId);
 
-        $todos=[];
-        while($row=mysqli_fetch_assoc($result)){
-            $todos[]=$row;
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+
+        $todos = [];
+        while ($row = $result->fetch_assoc()) {
+            $todos[] = $row;
         }
-        return $todos;
+    
+        $stmt->close();
 
+        return $todos;
     }
+    
+    
 
     
     public function delete(string $id){
@@ -97,36 +107,36 @@ class Todo{
         $stmt->close();
     }
 
-    public function emailchecker($email){
-        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // public function emailchecker($email){
+    //     $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+    //     $stmt->bind_param("s", $email);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            return true;
-        }
+    //     if ($result->num_rows > 0) {
+    //         return true;
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
-    public function login($email, $passwords){
-        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // public function login($email, $passwords){
+    //     $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+    //     $stmt->bind_param("s", $email);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            if ($passwords==$user['passwords']) {
-                return $user;
-            } else {
-                return null;
-            }
-        }
+    //     if ($result->num_rows > 0) {
+    //         $user = $result->fetch_assoc();
+    //         if ($passwords==$user['passwords']) {
+    //             return $user;
+    //         } else {
+    //             return null;
+    //         }
+    //     }
 
-        return null; 
-    }
+    //     return null; 
+    // }
 
     // public function getuserById($email, $password){
     //     $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
