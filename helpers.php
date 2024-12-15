@@ -8,3 +8,8 @@ function redirect(string $url) {
     header('Location: '. $url);
 }
 
+function apiResponse($data){
+    header('Content-Type: application/json');
+    echo json_encode($data);
+}
+

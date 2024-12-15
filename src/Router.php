@@ -62,4 +62,8 @@ class Router{
 
     }
 
+    public function isApicall(){
+        return mb_stripos($this->currentRoute,'/api')===0;
+    }
+
 }

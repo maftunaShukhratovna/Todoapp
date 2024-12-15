@@ -31,7 +31,7 @@ class Bot {
 
     public function sendTasks($chatId){
         $todo=new Todo();
-        $tasks=$todo->get();
+        $tasks=$todo->get(9);
 
         $text="Qilinishi kerak bo`lgan vazifalar:\n\n";
 
