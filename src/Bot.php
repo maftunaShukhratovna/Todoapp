@@ -4,7 +4,6 @@ namespace App;
 
 use GuzzleHttp\Client;
 
-
 class Bot {
     private $token;
     private $apiUrl;
@@ -25,48 +24,45 @@ class Bot {
                 'text' => $text
             ]
         ]);
-
     }
 
+    public function sendTasks($chatId) {
+        $todo = new Todo();
+        $tasks = $todo->get($_SESSION['user']['id']);
 
-    public function sendTasks($chatId){
-        $todo=new Todo();
-        $tasks=$todo->get(9);
+        $text = "Qilinishi kerak bo`lgan vazifalar:\n\n";
 
-        $text="Qilinishi kerak bo`lgan vazifalar:\n\n";
-
-        foreach($tasks as $task){
+        foreach ($tasks as $task) {
             $text .= "📝 " . $task['title'] . "\n";
             $text .= "Yaratilgan sana: " . $task['created_at'] . "\n";
             $text .= "Deadline: " . $task['due_date'] . "\n";
             $text .= "---------\n";
         }
 
-        $this->sendMessage($chatId,$text);
-
+        $this->sendMessage($chatId, $text);
     }
-    
 
-    public function Requests($update){
-        $chatId=$update['message']['chat']['id'];
-        $text=$update['message']['text'];
+    public function Requests($update) {
+        if (isset($update['message'])) {
+            $chatId = $update['message']['chat']['id'];
+            $text = $update['message']['text'];
 
-        if($text=='/start'){
-            $this->sendMessage($chatId, "Salom! Bu ToDo App bot. /task orqali barcha tasklarni olishingiz mumkin");
-        } 
-        elseif($text=='/task'){
-            $this->sendTasks($chatId);
+            if ($text == '/start') {
+                $this->sendMessage($chatId, "Salom! Bu ToDo App bot. /task orqali barcha tasklarni olishingiz mumkin");
+            } elseif ($text == '/task') {
+                $this->sendTasks($chatId);
+            }
+        } else {
+            error_log("Yangilanishda 'message' kaliti mavjud emas.");
         }
     }
 
-    public function getUpdates(){
-        $url=$this->apiUrl.'getUpdates';
-        $response=$this->client->get($url);
-        return json_decode($response->getBody(),true)['result'];
+    
+    public function getUpdates() {
+        $url = $this->apiUrl . 'getUpdates';
+        $response = $this->client->get($url);
+        return json_decode($response->getBody(), true)['result'];
     }
 }
-
-
-
 
 

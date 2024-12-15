@@ -1,5 +1,6 @@
 <?php
 
+
 $router=new App\Router();
 
 $router->get('/', fn()=> require 'controllers/pgController.php');
@@ -18,6 +19,7 @@ $router->post('/login', fn($users)=>require 'controllers/loginController.php');
 
 
 
+// $router->get('/telegram', fn()=> require 'controllers/telegramController.php');
 
 $router->get('/todos/{id}/delete', fn($todoId)=>require 'controllers/deleteController.php'); 
 
@@ -39,14 +41,3 @@ $router->get('/edit/{id}/in-progrees', fn($todoId)=>require 'controllers/InProgr
 
 
 
-
-
-
-
-
-
-// $updates=$bot->getUpdates();
-
-// foreach($updates as $update){
-//     $bot->Requests($update);
-// }

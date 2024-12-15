@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todo App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -48,18 +51,18 @@
     }
 
     .list-group-item.completed {
-        background: #a4f08b;
-        color: #388e3c;
-    }
-
-    .list-group-item.pending {
-        background: #fff3e0;
+        background: #ffebcc;
         color: #f57c00;
     }
 
+    .list-group-item.pending {
+        background: #fce4ec;
+        color: #d81b60;
+    }
+
     .list-group-item.in_progress {
-        background: #e3f2fd;
-        color: #0288d1;
+        background: #e8f5e9;
+        color: #388e3c;
     }
 
     .login-form,
@@ -226,9 +229,9 @@
     }
     </style>
 </head>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-tkXxZsImT5zLwld3z1qMPTxPQIc0j9vQ4tGHSnAzzCUQg+Kg5lnJRmM3ozcdRgyT" crossorigin="anonymous">
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-tkXxZsImT5zLwld3z1qMPTxPQIc0j9vQ4tGHSnAzzCUQg+Kg5lnJRmM3ozcdRgyT" crossorigin="anonymous">
+</script>
 </body>
 
 </html>

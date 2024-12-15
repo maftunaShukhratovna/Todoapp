@@ -8,11 +8,10 @@ $router=new Router();
 
 $todo=new Todo();
 
-$router->get('/api/todos', function() use ($todo){
-    apiResponse($todo->get(9));
+$router->get('/api/todos', function() use ($todo){    
+    apiResponse($todo->get($_SESSION['user']['id']));
 
 });
-
 
 $router->get('/api/todos/{id}', function($todoId) use ($todo){
     apiResponse($todo->getById($todoId));
