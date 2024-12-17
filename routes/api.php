@@ -13,14 +13,12 @@ $router->get('/api/todos', function() use ($todo){
 
 });
 
-
 $router->get('/api/todos/{id}', function($todoId) use ($todo){
     apiResponse($todo->getById($todoId));
 });
 
-
-$router->post('/api/todos', function() use ($todo){
-    $todo->store($_POST['title'], $_POST['dueDate'], $_SESSION['user']['id']);
+$router->post('/api/todos', function($todoId) use ($todo){
+    $todo->store($_POST['title'], $_POST['dueDate'], $todoId);
     apiResponse([
         'ok'=>true,
         'message'=>'Todo created successfully'
@@ -31,19 +29,42 @@ $router->delete('/api/todos/{id}', function($todoId) use ($todo){
     $todo->delete($todoId);
     apiResponse([
         'ok'=>true,
-        'message'=>'Todo delete successfully'
+        'message'=>'Todo deleted successfully'
     ]);
 });
 
 
 $router->post('/api/todos/{id}', function($todoId) use ($todo){
-    $todo->update($todoId, $_POST['title'], $_POST['status'], $_POST['dueDate']);
+    $todo->update($todoId, $_POST['title'], $_POST['dueDate']);
     apiResponse([
         'ok'=>true,
-        'message'=>'Todo update successfully'
+        'message'=>'Todo updated successfully'
     ]);
 });
 
+$router->get('/api/todos/{id}', function($todoId) use ($todo){
+    $todo->inProgress($todoId);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Status changed successfully'
+    ]);
+});
+
+$router->get('/api/todos/{id}', function($todoId) use ($todo){
+    $todo->complete($todoId);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Status changed successfully'
+    ]);
+});
+
+$router->get('/api/todos/{id}', function($todoId) use ($todo){
+    $todo->pending($todoId);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Status changed successfully'
+    ]);
+});
 
 
 
