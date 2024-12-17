@@ -8,6 +8,7 @@ class Bot {
     private $token;
     private $apiUrl;
     private $client;
+    private $lastUpdateId =0;
 
     public function __construct() {
         $this->token = $_ENV['TELEGRAM_BOT_TOKEN'];
@@ -17,7 +18,6 @@ class Bot {
 
     public function sendMessage($chatId, $text) {
         $url = $this->apiUrl . "sendMessage";
-
         $this->client->post($url, [
             'form_params' => [
                 'chat_id' => $chatId,
@@ -28,22 +28,27 @@ class Bot {
 
     public function sendTasks($chatId) {
         $todo = new Todo();
-        $tasks = $todo->get($_SESSION['user']['id']);
+        $userId = $_SESSION['user']['id'] ?? null;
 
-        $text = "Qilinishi kerak bo`lgan vazifalar:\n\n";
+        if ($userId) {
+            $tasks = $todo->get($userId);
+            $text = "Qilinishi kerak bo`lgan vazifalar:\n\n";
 
-        foreach ($tasks as $task) {
-            $text .= "📝 " . $task['title'] . "\n";
-            $text .= "Yaratilgan sana: " . $task['created_at'] . "\n";
-            $text .= "Deadline: " . $task['due_date'] . "\n";
-            $text .= "---------\n";
+            foreach ($tasks as $task) {
+                $text .= "📝 " . $task['title'] . "\n";
+                $text .= "Yaratilgan sana: " . $task['created_at'] . "\n";
+                $text .= "Deadline: " . $task['due_date'] . "\n";
+                $text .= "---------\n";
+            }
+
+            $this->sendMessage($chatId, $text);
+        } else {
+            $this->sendMessage($chatId, "Foydalanuvchi ID mavjud emas.");
         }
-
-        $this->sendMessage($chatId, $text);
     }
 
     public function Requests($update) {
-        if (isset($update['message'])) {
+        if (isset($update['message']['chat']['id']) && isset($update['message']['text'])) {
             $chatId = $update['message']['chat']['id'];
             $text = $update['message']['text'];
 
@@ -52,17 +57,28 @@ class Bot {
             } elseif ($text == '/task') {
                 $this->sendTasks($chatId);
             }
-        } else {
-            error_log("Yangilanishda 'message' kaliti mavjud emas.");
-        }
+        } 
     }
 
-    
+
+
     public function getUpdates() {
         $url = $this->apiUrl . 'getUpdates';
+    
+        if ($this->lastUpdateId > 0) {
+            $url .= '?offset=' . ($this->lastUpdateId + 1);
+        }
+    
         $response = $this->client->get($url);
-        return json_decode($response->getBody(), true)['result'];
+        $updates = json_decode($response->getBody(), true)['result'];
+    
+        if (!empty($updates)) {
+            $this->lastUpdateId = end($updates)['update_id'];
+        } else {
+            $this->lastUpdateId++;
+        }
+    
+        return $updates;
     }
+    
 }
-
-

@@ -62,6 +62,25 @@ class Router{
 
     }
 
+
+    public function delete($route,$callback){
+        if($_SERVER['REQUEST_METHOD']=="DELETE"){
+            $resourceValue=$this->getResource($route);
+            if($resourceValue){
+                $resourceroute=str_replace('{id}', $resourceValue,$route);
+                if($resourceroute== $this->currentRoute){
+                    $callback($resourceValue);
+                    exit();
+                }
+            }
+
+            if($route==$this->currentRoute){
+                $callback($resourceValue ?? null);
+                exit();
+            }
+        }
+    }
+
     public function isApicall(){
         return mb_stripos($this->currentRoute,'/api')===0;
     }

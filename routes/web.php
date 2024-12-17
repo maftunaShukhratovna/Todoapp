@@ -19,7 +19,7 @@ $router->post('/login', fn($users)=>require 'controllers/loginController.php');
 
 
 
-// $router->get('/telegram', fn()=> require 'controllers/telegramController.php');
+$router->get('/telegram', fn()=> require 'controllers/telegramController.php');
 
 $router->get('/todos/{id}/delete', fn($todoId)=>require 'controllers/deleteController.php'); 
 
