@@ -35,7 +35,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <!-- <a href="https://t.me/nttodo_appbot" target="_blank"> -->
+                        <a href="https://t.me/nttodo_appbot" target="_blank">
                             <button class="btn btn-primary"><i class="fab fa-telegram-plane"></i> Telegram Bot</button>
                         </a>
                     </li>
