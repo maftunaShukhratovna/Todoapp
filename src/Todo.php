@@ -41,6 +41,7 @@ class Todo{
 
         return $todos;
     }
+
     
     public function delete(string $id){
         $query= "DELETE FROM todos WHERE id=?";

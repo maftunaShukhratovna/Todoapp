@@ -9,7 +9,7 @@ if($router->isApicall()){
     require 'routes/api.php';
     exit();
 } elseif ($router->isTelegram()){
-    require 'telegram/routes.php';
+    require 'telegram/telegram.php';
     exit();
 }
 
