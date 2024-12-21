@@ -94,4 +94,12 @@ class Todo{
         $stmt->close();
     }
 
+    public function updateTitle( $id, $title){
+        $query= "UPDATE todos SET title=? where id=?";
+        $stmt= $this->mysqli->prepare($query);
+        $stmt->bind_param("si",$title, $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
 }

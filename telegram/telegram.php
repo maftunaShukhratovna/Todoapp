@@ -1,13 +1,8 @@
 <?php
-use App\Todo;
-use App\User;
 use Telegram\Bot;
-
 $bot = new Bot();
-$user = new User();
-$todos = new Todo();
 
-$bot->setWebhook("https://0450-92-63-204-127.ngrok-free.app/telegram");
+var_dump($bot->setWebhook("https://20c4-185-139-138-4.ngrok-free.app/telegram"));
 
 $update = json_decode(file_get_contents('php://input'), true);
 
@@ -17,35 +12,29 @@ if (isset($update['message'])) {
     $name = $update['message']['chat']['first_name'];
 
     if (mb_stripos($text, '/start') !== false) {
-        $userId = explode('/start', $text)[1];
-
-        if ($userId) {
-            $user->updateTelegramId($chatId, $userId);
-            $bot->makeRequest('sendMessage', [
-                'chat_id' => $chatId,
-                'text' => 'Welcome to ToDO App!!! ' . $name . "\n/task\n/help"
-            ]);
-        } else {
-            $bot->makeRequest('sendMessage', [
-                'chat_id' => $chatId,
-                'text' => "Sizning ID raqamingiz mavjud emas"
-            ]);
-        }
-        exit();
+        $bot->startMessage($text, $name, $chatId);
     }
-
     if ($text == '/task') {
-        $userId = $user->getUserIdByTelegramId($chatId);
-
-        $bot->sendTasks($userId, $chatId);
-        exit();
+        $bot->taskMessage($chatId);    
     }
 }
 
 
 if(isset($update['callback_query'])){
-    $bot->buttons($update);
-    exit();
+    $callbackQuery = $update['callback_query'];
+    $callbackData = $callbackQuery['data'];
+    $chatId = $callbackQuery['message']['chat']['id'];
+    $messageId = $callbackQuery['message']['message_id'];
+
+    if (strpos($callbackData, 'task_') === 0) {
+        $bot->getTaskInfo($callbackData, $chatId, $messageId);
+    } elseif (strpos($callbackData, 'status_') === 0) {
+        $bot->StatusChange($callbackData, $chatId);
+    } elseif (strpos($callbackData, 'edit_') === 0) {
+        $bot->EditTask($callbackData, $chatId, $messageId);
+    } 
+} elseif ($bot->redis->exists('edit_'.$chatId)) {
+    $bot->EditInput($update, $chatId);
 }
 
 
